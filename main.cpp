@@ -14,9 +14,9 @@
 const int WIDTH = 25;
 
 void shiftTreeToRight(BstNode* root, int delta) {
-   if (root->left != nullptr) shiftTreeToRight(root->left, delta);
+   if (root->getLeft() != nullptr) shiftTreeToRight(root->getLeft(), delta);
    root->setX(root->getX() + delta);
-   if (root->right != nullptr) shiftTreeToRight(root->right, delta);
+   if (root->getRight() != nullptr) shiftTreeToRight(root->getRight(), delta);
 }
 
 class CircledText : public QGraphicsEllipseItem
@@ -38,22 +38,22 @@ protected:
 };
 
 void display(BstNode* tree, QGraphicsScene* scene, int width) {
-    if (tree->left != nullptr) {
+    if (tree->getLeft() != nullptr) {
         // draw line from parent to the left node
-        scene->addLine(tree->getX(), tree->getY() + width/2, tree->left->getX() + width/2, tree->left->getY());
+        scene->addLine(tree->getX(), tree->getY() + width/2, tree->getLeft()->getX() + width/2, tree->getLeft()->getY());
 
-        display(tree->left, scene, width);
+        display(tree->getLeft(), scene, width);
     }
 
     // Create an instance of CircledText & add it to the scene.
     CircledText *c = new CircledText(tree->getValue(), width, QPoint(tree->getX(), tree->getY()));
     scene->addItem(c);
 
-    if (tree->right != nullptr) {
+    if (tree->getRight() != nullptr) {
         // draw line from parent to the right node
-        scene->addLine(tree->getX() + width, tree->getY() + width/2, tree->right->getX() + width/2, tree->right->getY());
+        scene->addLine(tree->getX() + width, tree->getY() + width/2, tree->getRight()->getX() + width/2, tree->getRight()->getY());
 
-        display(tree->right, scene, width);
+        display(tree->getRight(), scene, width);
     }
 }
 

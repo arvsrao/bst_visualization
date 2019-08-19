@@ -22,7 +22,7 @@ void BstNode::setY(int _y) { y = _y; }
 // The child is in the left tree of the grandparent then it, the child, must not have x coord > x coord of
 // grandparent; similarly, if the child is the right tree of the grandparent
 void BstNode::insert(int val) {
-    if ( val < value ) {
+    if ( val < this->getValue() ) {
         if ( left == nullptr ) left = new BstNode(val);
         else left->insert(val);
     }
@@ -88,7 +88,7 @@ void BstNode::updateCoordinates(BstNode* node, int width ) {
  void BstNode::printInOrder() {
      if (this->left != nullptr) this->left->printInOrder();
      std::cout << this->getValue() << " with (" << this->getX() << ", " << this->getY() << ") ";
-     if (this->right != nullptr) this->right->printInOrder();
+     if (this->getRight() != nullptr) this->getRight()->printInOrder();
  }
 
 BstNode::~BstNode() {
