@@ -75,7 +75,7 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 
-    auto tree = generateRandomBst(25, 200);
+    auto tree = generateRandomBst(15, 200);
     BalancedBstNode::updateCoordinates(tree, WIDTH);
 
     // Create a view, put a scene in it and add tiny circles to the scene

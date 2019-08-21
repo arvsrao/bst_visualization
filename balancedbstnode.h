@@ -27,6 +27,7 @@ struct BalancedBstNode : BstNode
 
     // rotate a tree so that only the left edge/link is red.
     static BalancedBstNode* rotateLeft(BalancedBstNode* parent);
+    static BalancedBstNode* rotateRight(BalancedBstNode* parent);
 
     static void insert(BalancedBstNode* node, int val);
 

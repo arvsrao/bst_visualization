@@ -33,7 +33,7 @@ BalancedBstNode* BalancedBstNode::getRight() { return balanced_right; }
 void BalancedBstNode::setLeft(BalancedBstNode* node) { balanced_left = node; }
 void BalancedBstNode::setRight(BalancedBstNode* node) { balanced_right = node; }
 
-// rotate a node that leans right.
+// rotate a node that leans right
 BalancedBstNode* BalancedBstNode::rotateLeft(BalancedBstNode* parent) {
    BalancedBstNode* r = parent->getRight(); // the new parent
    parent->setRight(r->getLeft());
@@ -43,6 +43,18 @@ BalancedBstNode* BalancedBstNode::rotateLeft(BalancedBstNode* parent) {
    r->color = parent->color;
    parent->color = RED;
    return r;
+}
+
+// rotate a node right
+BalancedBstNode* BalancedBstNode::rotateRight(BalancedBstNode* parent) {
+   BalancedBstNode* l = parent->getLeft(); // the new parent
+   parent->setLeft(l->getRight());
+   l->setRight(parent);
+
+   // parent is now a left node and has a RED link to it.
+   l->color = parent->color;
+   parent->color = RED;
+   return l;
 }
 
 // The child is in the left tree of the grandparent then it, the child, must not have x coord > x coord of
