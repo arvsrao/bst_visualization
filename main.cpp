@@ -80,9 +80,6 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 
-    //    auto tree = new BalancedBstNode { BalancedBstNode::BLACK, integer_generator() };
-    //    for ( int i = 0; i < N ; i++) BalancedBstNode::insert(tree, BalancedBstNode::BLACK, integer_generator(), WIDTH );
-
     BstNode* tree = generateRandomBst(30, 150);
     BstNode::updateCoordinates(tree, WIDTH);
 

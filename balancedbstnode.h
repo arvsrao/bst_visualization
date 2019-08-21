@@ -17,6 +17,13 @@ struct BalancedBstNode : BstNode
 
     bool isRed();
     bool isBlack();
+
+    bool isLeftRed();
+    bool isLeftLeftRed();
+    bool isRightRed();
+    bool isLeftBlack();
+    bool isRightBlack();
+
     virtual BalancedBstNode* getLeft();
     virtual BalancedBstNode* getRight();
 
@@ -26,10 +33,11 @@ struct BalancedBstNode : BstNode
     void setRight(BalancedBstNode* node);
 
     // rotate a tree so that only the left edge/link is red.
+    static void flipColors(BalancedBstNode* node);
     static BalancedBstNode* rotateLeft(BalancedBstNode* parent);
     static BalancedBstNode* rotateRight(BalancedBstNode* parent);
 
-    static void insert(BalancedBstNode* node, int val);
+    static BalancedBstNode* insert(BalancedBstNode* node, int val);
 
     virtual ~BalancedBstNode();
 };

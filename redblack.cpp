@@ -5,6 +5,7 @@
 #include <QGraphicsEllipseItem>
 #include <QPointF>
 #include <QWidget>
+#include <QPen>
 
 #include "bstnode.h"
 #include "balancedbstnode.h"
@@ -34,19 +35,27 @@ protected:
 void display(BalancedBstNode* tree, QGraphicsScene* scene, int width) {
     if (tree->getLeft() != nullptr) {
         // draw line from parent to the left node
-        scene->addLine(tree->getX(), tree->getY() + width/2, tree->getLeft()->getX() + width/2, tree->getLeft()->getY());
-
+        if (tree->getLeft()->isRed()) {
+            scene->addLine(tree->getX(), tree->getY() + width/2, tree->getLeft()->getX() + width/2, tree->getLeft()->getY(), QPen(Qt::red));
+        }
+        else {
+            scene->addLine(tree->getX(), tree->getY() + width/2, tree->getLeft()->getX() + width/2, tree->getLeft()->getY());
+        }
         display(tree->getLeft(), scene, width);
     }
 
     // Create an instance of CircledText & add it to the scene.
     CircledText *c = new CircledText(tree->getValue(), width, QPoint(tree->getX(), tree->getY()));
     scene->addItem(c);
-    std::cout << tree->getValue() << "\n";
 
     if (tree->getRight() != nullptr) {
         // draw line from parent to the right node
-        scene->addLine(tree->getX() + width, tree->getY() + width/2, tree->getRight()->getX() + width/2, tree->getRight()->getY());
+        if (tree->getRight()->isRed()) {
+            scene->addLine(tree->getX() + width, tree->getY() + width/2, tree->getRight()->getX() + width/2, tree->getRight()->getY(), QPen(Qt::red));
+        }
+        else {
+            scene->addLine(tree->getX() + width, tree->getY() + width/2, tree->getRight()->getX() + width/2, tree->getRight()->getY());
+        }
 
         display(tree->getRight(), scene, width);
     }
@@ -57,16 +66,22 @@ BalancedBstNode* generateRandomBst(const int N, const int RANGE) {
    GenerateRandomInteger integer_generator(RANGE);
 
    auto root = new BalancedBstNode { integer_generator() };
-   for ( int i = 0; i < N ; i++) BalancedBstNode::insert(root, integer_generator());
+   for ( int i = 0; i < N ; i++) {
+       root = BalancedBstNode::insert(root, integer_generator());
+       root->setBlack();
+   }
 
    return root;
 }
 
-BstNode* testBst() {
-    const int array_size = 12;
-    const int test_array[] = { 14, 7, 0, 3, 9, 13, 39, 28, 27, 29, 45, 40 };//,35,31,39};
+BalancedBstNode* testBst() {
+    const int array_size = 18;
+    const int test_array[] = { 20, 2, 1, 3, 9, 13, 234, 76, -34, 39, 28, 27, 29, 45, 40, 35, 31, 39 };
     auto tree = new BalancedBstNode { test_array[0] };
-    for ( int i = 1; i <= array_size - 1 ; i++) BalancedBstNode::insert(tree, test_array[i] );
+    for ( int i = 1; i <= array_size - 1 ; i++) {
+        tree = BalancedBstNode::insert(tree, test_array[i] );
+        tree->setBlack();
+    }
 
     return tree;
 }
@@ -75,7 +90,8 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 
-    auto tree = generateRandomBst(15, 200);
+    auto tree = generateRandomBst(23, 200);
+   // auto tree = testBst();
     BalancedBstNode::updateCoordinates(tree, WIDTH);
 
     // Create a view, put a scene in it and add tiny circles to the scene
