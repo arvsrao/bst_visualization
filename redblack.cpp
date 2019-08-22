@@ -33,10 +33,11 @@ protected:
 };
 
 void display(BalancedBstNode* tree, QGraphicsScene* scene, int width) {
+
     if (tree->getLeft() != nullptr) {
         // draw line from parent to the left node
         if (tree->getLeft()->isRed()) {
-            scene->addLine(tree->getX(), tree->getY() + width/2, tree->getLeft()->getX() + width/2, tree->getLeft()->getY(), QPen(Qt::red));
+            scene->addLine(tree->getX(), tree->getY() + width/2, tree->getLeft()->getX() + width/2, tree->getLeft()->getY(), QPen(Qt::red,3));
         }
         else {
             scene->addLine(tree->getX(), tree->getY() + width/2, tree->getLeft()->getX() + width/2, tree->getLeft()->getY());
@@ -51,7 +52,7 @@ void display(BalancedBstNode* tree, QGraphicsScene* scene, int width) {
     if (tree->getRight() != nullptr) {
         // draw line from parent to the right node
         if (tree->getRight()->isRed()) {
-            scene->addLine(tree->getX() + width, tree->getY() + width/2, tree->getRight()->getX() + width/2, tree->getRight()->getY(), QPen(Qt::red));
+            scene->addLine(tree->getX() + width, tree->getY() + width/2, tree->getRight()->getX() + width/2, tree->getRight()->getY(), QPen(Qt::red,3));
         }
         else {
             scene->addLine(tree->getX() + width, tree->getY() + width/2, tree->getRight()->getX() + width/2, tree->getRight()->getY());
