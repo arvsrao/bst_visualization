@@ -1,13 +1,13 @@
-#include "generaterandominteger.h"
+#include "include/bst_visualization/generaterandominteger.h"
 
 // default constructor
 GenerateRandomInteger::GenerateRandomInteger() {
-    int RANGE = 100;
-    std::random_device rd;
-    std::default_random_engine generator(rd());
-    std::uniform_int_distribution<int> distribution(0, RANGE);
-    gen = generator;
-    dist = distribution;
+  int RANGE = 100;
+  std::random_device rd;
+  std::default_random_engine generator(rd());
+  std::uniform_int_distribution<int> distribution(0, RANGE);
+  gen = generator;
+  dist = distribution;
 }
 
 GenerateRandomInteger::GenerateRandomInteger(int _N) : Range(_N) {
@@ -19,5 +19,5 @@ GenerateRandomInteger::GenerateRandomInteger(int _N) : Range(_N) {
 }
 
 int GenerateRandomInteger::operator()() {
-    return dist(gen);
+  return dist(gen);
 }
